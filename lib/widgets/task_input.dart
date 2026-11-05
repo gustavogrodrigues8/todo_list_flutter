@@ -108,7 +108,7 @@ class _TaskInputState extends State<TaskInput> {
                   ),
                   const SizedBox(width: 12),
                   FilledButton(
-                    onPressed: _submit
+                    onPressed: _submit,
                     style: FilledButton.styleFrom(
                       minimumSize: const Size(120, 48),
                       shape: RoundedRectangleBorder(
