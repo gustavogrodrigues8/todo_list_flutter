@@ -1,5 +1,6 @@
 class AppSettings {
   bool darkMode;
+
   bool confirmDelete;
 
   AppSettings({

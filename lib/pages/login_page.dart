@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../services/app_storage.dart';
 
-class LoginPage extends StatefulWidget{
+class LoginPage extends StatefulWidget {
   final VoidCallback onLogin;
 
   const LoginPage({
@@ -15,31 +16,34 @@ class LoginPage extends StatefulWidget{
 
 class _LoginPageState extends State<LoginPage> {
   final AppStorage _appStorage = AppStorage();
+
   final TextEditingController _usernameController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  void dispose(){
-    _usernameController.clear();
-    _passwordController.clear();
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
-  Future<void>  _login() async {
+  Future<void> _login() async {
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
+
     final isValid = await _appStorage.validateLogin(username, password);
 
-    if(!mounted){
+    if (!mounted) {
       return;
     }
-    if(!isValid){
+
+    if (!isValid) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Usuário ou senha incorretos'),
+          content: Text('Usuário ou senha incorretos.'),
         ),
       );
-
       return;
     }
 
@@ -48,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context){
-    final colorScheme  = Theme.of(context).colorScheme;
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -58,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 400),
+              constraints: const BoxConstraints(maxWidth: 400),
               child: Column(
                 children: [
                   Icon(
@@ -73,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8,),
+                  const SizedBox(height: 8),
                   Text(
                     'Organize seu dia',
                     style: textTheme.bodyLarge?.copyWith(
@@ -84,15 +88,15 @@ class _LoginPageState extends State<LoginPage> {
                   TextField(
                     controller: _usernameController,
                     textInputAction: TextInputAction.next,
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Usuário',
                       hintText: 'aluno',
                       border: OutlineInputBorder(
-                        borderRadius:  BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(height: 16),
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
@@ -111,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 52,
                     child: FilledButton(
                       onPressed: _login,
-                      child: const Text('Entrar'),
+                      child: const Text('ENTRAR'),
                     ),
                   ),
                 ],
